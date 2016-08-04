@@ -1,9 +1,7 @@
-'use strict';
-const dgram = require('dgram');
-const dns = require('dns-socket');
-const pify = require('pify');
+var dgram = require('dgram')
+var dns = require('dns-socket')
 
-const type = {
+var type = {
 	v4: {
 		server: '208.67.222.222',
 		question: {
@@ -20,26 +18,20 @@ const type = {
 	}
 };
 
-const query = version => {
-	const data = type[version];
-
-	const socket = dns({
+var query = function(version, callback) {
+	var data = type[version]
+	
+	var socket = dns({
 		socket: dgram.createSocket(version === 'v6' ? 'udp6' : 'udp4')
-	});
-
-	return pify(socket.query.bind(socket))({
+	})
+	
+	socket.query({
 		questions: [data.question]
-	}, 53, data.server).then(res => {
-		const ip = res.answers[0] && res.answers[0].data;
-		socket.destroy();
+	}, 53, data.server, function(err, res) {
+		var ip = res.answers[0] && res.answers[0].data
+		socket.destroy()
+		callback(ip)
+	})
+}
 
-		if (!ip) {
-			throw new Error('Couldn\'t find your IP');
-		}
-
-		return ip;
-	});
-};
-
-module.exports.v4 = () => query('v4');
-module.exports.v6 = () => query('v6');
+module.exports = query
