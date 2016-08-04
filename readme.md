@@ -7,7 +7,7 @@ Queries the DNS records of OpenDNS which has an entry with your IP address.
 ## Usage
 
 ```js
-const publicIp = require('./index')
+const publicIp = require('./publicIp')
 
 publicIp('v4', function(ip) {
 	console.log(ip);
@@ -23,16 +23,18 @@ publicIp('v6', function(ip) {
 
 ## API
 
-### publicIp.v4()
+Does not handle errors at all -- trusts that OpenDNS will be available and respond correctly (it might not).
 
-Returns a Promise for your public IPv4 address.
+### publicIp('v4', callback)
 
-### publicIp.v6()
+Invokes callback with your public IPv4 ip as the first argument.
 
-Returns a Promise for your public IPv6 address.
+### publicIp('v6', callback)
+
+Invokes callback with your public IPv6 ip as the first argument.
 
 
 ## Related
 
-- [public-ip-cli](https://github.com/sindresorhus/public-ip-cli) - CLI for this module
+- [public-ip](https://github.com/sindresorhus/public-ip) - Original of this module, with promises
 - [internal-ip](https://github.com/sindresorhus/internal-ip) - Get your internal IP address
