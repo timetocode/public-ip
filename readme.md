@@ -1,6 +1,6 @@
 
 
-> Modified promise-free version of [public-ip]
+> Modified promise-free version of [public-ip](https://github.com/sindresorhus/public-ip)
 
 Queries the DNS records of OpenDNS which has an entry with your IP address.
 
