@@ -1,6 +1,6 @@
-# public-ip [![Build Status](https://travis-ci.org/sindresorhus/public-ip.svg?branch=master)](https://travis-ci.org/sindresorhus/public-ip)
 
-> Get your public IP address - very fast!
+
+> Modified promise-free version of [public-ip]
 
 Queries the DNS records of OpenDNS which has an entry with your IP address.
 
